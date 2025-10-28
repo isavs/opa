@@ -35,7 +35,7 @@ body {
     background-image: url("imgs/lupa.png");
     opacity: 0.5;
     background-position: center;
-    background-size: 70%;
+    background-size: 90%;
     background-repeat: no-repeat;
     border-radius: 50%; /* Faz o hotspot ser um círculo */
     cursor: pointer;
@@ -47,7 +47,7 @@ body {
     /* background-color: rgba(255, 255, 255, 0.6); Mais visível ao passar o mouse */
     transform: scale(1.1); /* Um pequeno efeito de zoom */
     opacity: 1;
-    background-size: 80%;
+    background-size: 110%;
 }
 
 /* Estilo do Modal (Pop-up) */
