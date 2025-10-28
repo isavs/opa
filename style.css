@@ -194,8 +194,8 @@ body {
 
 .modal-content .refs{
     color: #363636;
-    font-size: 12px;
-    line-height: 1.15;
-    margin-bottom: 5px;
+    font-size: 11px;
+    margin: 0 0 10px 0;
+    line-height: 1;
     font-family: "Times New Roman", serif;
 }
