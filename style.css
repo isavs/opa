@@ -31,7 +31,12 @@ body {
     position: absolute; /* Permite posicionar livremente */
     width: 50px; /* Tamanho do hotspot, ajuste conforme necessário */
     height: 50px;
-    background-color: rgba(255, 255, 255, 0.2); /* Um leve brilho para indicar que é clicável */
+    /* background-color: rgba(255, 255, 255, 0.2); Um leve brilho para indicar que é clicável */
+    background-image: url("imgs/lupa.png");
+    opacity: 0.5;
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
     border-radius: 50%; /* Faz o hotspot ser um círculo */
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -39,8 +44,10 @@ body {
 }
 
 .hotspot:hover {
-    background-color: rgba(255, 255, 255, 0.6); /* Mais visível ao passar o mouse */
+    /* background-color: rgba(255, 255, 255, 0.6); Mais visível ao passar o mouse */
     transform: scale(1.1); /* Um pequeno efeito de zoom */
+    opacity: 1;
+    background-size: 80%;
 }
 
 /* Estilo do Modal (Pop-up) */
