@@ -1,0 +1,194 @@
+@font-face {
+  font-family: 'Anaktoria';
+  src: url('fonts/Anaktoria.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    overflow: hidden; /* Evita scroll na página principal */
+}
+
+.container {
+    position: relative; /* Essencial para posicionar os hotspots */
+    width: 100vw; /* Ocupa 100% da largura da viewport */
+    height: 100vh; /* Ocupa 100% da altura da viewport */
+    overflow: hidden; /* Garante que a imagem não vaze */
+}
+
+.background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Faz a imagem cobrir todo o container, cortando se necessário */
+    display: block;
+}
+
+.hotspot {
+    position: absolute; /* Permite posicionar livremente */
+    width: 50px; /* Tamanho do hotspot, ajuste conforme necessário */
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.2); /* Um leve brilho para indicar que é clicável */
+    border-radius: 50%; /* Faz o hotspot ser um círculo */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /*border: 1px solid rgba(255, 255, 255, 0.5);  Borda para destaque */
+}
+
+.hotspot:hover {
+    background-color: rgba(255, 255, 255, 0.6); /* Mais visível ao passar o mouse */
+    transform: scale(1.1); /* Um pequeno efeito de zoom */
+}
+
+/* Estilo do Modal (Pop-up) */
+.modal {
+    /* MANTENHA estas propriedades */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* Começa invisível para a animação */
+    transition: opacity 0.3s ease;
+    padding: 20px;
+    box-sizing: border-box;
+
+    /* ***** ALTERAÇÃO AQUI ***** */
+    /* Quando o modal não tem a classe 'show', ele deve estar completamente escondido */
+    display: none; /* Garante que não ocupa espaço nem intercepta cliques */
+}
+
+.modal.show {
+    /* Quando o modal tem a classe 'show', ele deve ser flexbox e visível */
+    display: flex; /* Mostra o modal como flexbox */
+    opacity: 1; /* Torna visível */
+}
+
+.modal-content {
+    background-color: #f2e4cc;
+    /* margin: 10% auto;  Removido esta margem para flexbox fazer a centralização */
+    padding: 30px;
+    border: 1px solid #888;
+    width: 90%; /* Aumentado um pouco a largura para mais espaço */
+    max-width: 700px; /* Largura máxima para não ficar muito grande */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: fadeIn 0.5s; /* Animação ao abrir */
+    backdrop-filter: blur(2px);
+
+    /* ***** NOVOS E IMPORTANTES AJUSTES AQUI ***** */
+    max-height: 90vh; /* Altura máxima do conteúdo: 90% da altura da viewport */
+    overflow-y: auto; /* Adiciona scroll vertical SE o conteúdo exceder max-height */
+    box-sizing: border-box; /* Inclui padding e border na altura/largura total */
+    display: flex; /* Usar flexbox para organizar itens internos */
+    flex-direction: column; /* Coloca os itens um abaixo do outro */
+    align-items: center; /* Centraliza os itens (imagem, texto) */
+    text-align: center;
+}
+
+/* Estilo para o grupo de imagem e legenda (figure) */
+.modal-figure {
+    margin: 15px auto; /* Centraliza a figura e adiciona margem */
+    max-width: 100%; /* Garante que a figura não estoure o modal */
+    display: block; /* Para controlar melhor o layout */
+}
+
+/* Estilo para imagens dentro do modal (mantendo os estilos anteriores) */
+.modal-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Ajustado para 0 auto, pois a margem já está na figure */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-height: unset; 
+}
+
+/* Estilo para a legenda (figcaption) */
+.modal-figcaption {
+    font-size: 0.8em; /* Tamanho da fonte menor, conforme ABNT */
+    color: #555;
+    text-align: center; /* Centraliza o texto da legenda */
+    padding: 0 10px; /* Um pouco de padding lateral para não colar nas bordas */
+}
+
+.modal-figcaption .figure-title {
+    font-weight: bold; /* Título da figura em negrito */
+    font-size: 14px;
+    margin-bottom: 5px; /* Espaço entre título e fonte */
+}
+
+.modal-figcaption .figure-source {
+    margin-top: 0;
+    font-style: italic; /* A fonte geralmente é em itálico ou com fonte menor */
+}
+
+.modal-figcaption .figure-source a {
+    color: #0056b3; /* Cor do link da fonte */
+    text-decoration: none; /* Remove sublinhado padrão do link */
+}
+
+.modal-figcaption .figure-source a:hover {
+    text-decoration: underline; /* Sublinha ao passar o mouse */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-button {
+    color: #aaa;
+    /* float: right; Removido float, pois com flexbox pode causar problemas */
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 1001; /* Garante que o botão esteja acima de outros elementos do modal */
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h1 {
+    color: #180c00;
+    margin-top: 0; /* Garante que o título não tenha margem superior extra */
+    margin-bottom: 20px;
+    width: 100%; /* Ocupa a largura total para centralização */
+    font-family: 'Anaktoria', sans-serif;
+    font-size: 40px;
+}
+
+.modal-content p {
+    color: #070300;
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    font-family: "Times New Roman", serif;;
+    text-align: justify; /* Deixa o texto justificado, se preferir */
+    width: 100%;
+}
+
+.modal-content .refs{
+    color: #363636;
+    font-size: 12px;
+    line-height: 1.15;
+    margin-bottom: 5px;
+    font-family: "Times New Roman", serif;
+}
